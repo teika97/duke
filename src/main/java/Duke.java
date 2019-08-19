@@ -30,7 +30,8 @@ public class Duke {
                 int itemNo = Integer.parseInt(cmdBreakDown[1]) - 1;
                 list[itemNo].isDone = true;
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("["+list[itemNo].getStatusIcon()+"] "+list[itemNo].description);
+                // print out completed task with indentation
+                System.out.println("   "+list[itemNo]);
             }
             // all other commands will be added into the list as a new task
             else {
