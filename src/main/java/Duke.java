@@ -14,9 +14,9 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
-        String command = input.next();
 
-        while (command!="bye") {
+        String command = input.next();
+        while (!(command.equals("bye"))) {
             System.out.println(command);
             command = input.next();
         }
