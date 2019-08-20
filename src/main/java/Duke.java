@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        String command;
         Task[] list = new Task[100];
 
         /**String logo = " ____        _        \n"
@@ -16,10 +17,10 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
 
-        String command = input.nextLine();
         // n is the no. of items in the list
         int n = 0;
-        while (!(command.equals("bye"))) {
+        do {
+            command = input.nextLine();
             // calls method to print all tasks in list
             if (command.equals("list")) {
                 printList(list,n);
@@ -27,21 +28,21 @@ public class Duke {
             // marks tasks as done for the done command
             else if (command.contains("done")) {
                 String [] cmdBreakDown = command.split(" ");
-                int itemNo = Integer.parseInt(cmdBreakDown[1]) - 1;
+                int itemNo = Integer.parseInt(cmdBreakDown[1])-1;
                 list[itemNo].isDone = true;
                 System.out.println("Nice! I've marked this task as done:");
                 // print out completed task with indentation
-                System.out.println("   "+list[itemNo]);
+                System.out.println(" "+list[itemNo]);
             }
             // all other commands will be added into the list as a new task
             else {
                 Task newItem = new Task(command);
                 list[n] = newItem;
-                System.out.println("added: "+newItem.description);
+                System.out.println("added: " + newItem.description);
                 n++;
             }
-            command = input.nextLine();
-        }
+        } while (!(command.equals("bye")));
+
         System.out.println("Bye. Hope to see you again soon!");
     }
 
