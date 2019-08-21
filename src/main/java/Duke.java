@@ -133,17 +133,25 @@ public class Duke {
             }
             if ((cmd[0].equals("deadline")||cmd[0].equals("event"))&&(cmd[3]==null)) {
                 throw new DukeException("No date/time input for "+cmd[0]+ "."+
-                                        " Note: Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at."));
+                                        " Note: Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at")+" before date/time.");
             }
             if ((isDeadline||isEvent)&&!(cmd[2].equals(isDeadline? "/by" : "/at"))) {
-                throw new DukeException("Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at."));
+                throw new DukeException("Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at")+".");
             }
 
         }
         if (cmd[0].equals("done")) {
-            int itemNo = Integer.parseInt(cmd[1]);
+            int itemNo;
+            try {
+                itemNo = Integer.parseInt(cmd[1]);
+            } catch (NumberFormatException exception) {
+                throw new DukeException("Unable to format due to improper input.");
+            }
             if (itemNo > n) {
                 throw new DukeException("Task "+itemNo+" not found in list.");
+            }
+            if (!(cmd[2]==null)||!(cmd[3]==null)) {
+                throw new DukeException("Unable to format due to improper input.");
             }
         }
     }
