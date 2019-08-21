@@ -15,63 +15,60 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
-        // n is the no. of items in the list
-        int n = 0;
         String command = input.nextLine();
-        String [] formattedCmd = formatCommand(command, n);
+        String [] formattedCmd = formatCommand(command, list.size());
 
         while (!(formattedCmd[0].equals("bye"))) {
             // calls method to print all tasks in list
             if (formattedCmd[0].equals("list")) {
-                printList(list,n);
+                printList(list);
             }
             // marks tasks as done for the done command
             else if (formattedCmd[0].contains("done")) {
                 int itemNo = Integer.parseInt(formattedCmd[1]) - 1;
-                list[itemNo].isDone = true;
+                list.get(itemNo).isDone = true;
                 System.out.println("Nice! I've marked this task as done:");
                 // print out completed task with indentation
-                System.out.println("   "+list[itemNo]);
+                System.out.println("   "+list.get(itemNo));
             }
             // all other commands will be added into the list as a new task
             else {
                 boolean hasError = false;
                 switch (formattedCmd[0]) {
                     case "todo":
-                        list[n] = new Todo(formattedCmd[1]);
+                        list.add(new Todo(formattedCmd[1]));
                         break;
                     case "deadline":
-                        list[n] = new Deadline(formattedCmd[1],formattedCmd[3]);
+                        list.add(new Deadline(formattedCmd[1],formattedCmd[3]));
                         break;
                     case "event":
-                        list[n] = new Event(formattedCmd[1],formattedCmd[3]);
+                        list.add(new Event(formattedCmd[1],formattedCmd[3]));
                         break;
                     default:
                         hasError = true;
                 }
                 if (!hasError) {
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("   " + list[n]);
-                    n++;
-                    if (n > 1) {
-                        System.out.println("Now you have " + n + " tasks in the list.");
+                    System.out.println("   " + list.get(list.size()-1));
+                    if (list.size() > 1) {
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
                     } else {
-                        System.out.println("Now you have " + n + " task in the list.");
+                        System.out.println("Now you have " + list.size() + " task in the list.");
                     }
                 }
             }
             command = input.nextLine();
-            formattedCmd = formatCommand(command, n);
+            formattedCmd = formatCommand(command, list.size());
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     // Prints all list items in the string array
-    private static void printList(Task[] list, int n) {
+    private static void printList(ArrayList<Task> list) {
         System.out.println("Here are the tasks in your list:");
-        for (int i=0; i<n; i++) {
+        for (int i=0; i<list.size(); i++) {
             int listNum = i+1;
-            System.out.println(listNum+"."+list[i]);
+            System.out.println(listNum+"."+list.get(i));
         }
     }
 
