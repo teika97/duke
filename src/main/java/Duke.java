@@ -1,9 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<Task>();
 
         /**String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,7 +31,14 @@ public class Duke {
                 // print out completed task with indentation
                 System.out.println("   "+list.get(itemNo));
             }
-            // all other commands will be added into the list as a new task
+            // delete task from list
+            else if (formattedCmd[0].contains("delete")) {
+                int itemNo = Integer.parseInt(formattedCmd[1]) - 1;
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("   "+list.get(itemNo));
+                list.remove(itemNo);
+                System.out.println("Now you have "+list.size()+" in the list.");
+            }
             else {
                 boolean hasError = false;
                 switch (formattedCmd[0]) {
@@ -120,15 +127,16 @@ public class Duke {
         boolean isList = cmd[0].equals("list");
         boolean isBye = cmd[0].equals("bye");
         boolean isDone = cmd[0].equals("done");
+        boolean isDelete = cmd[0].equals("delete");
 
-        if (!(isTodo||isDeadline||isEvent||isList||isBye||isDone)) {
+        if (!(isTodo||isDeadline||isEvent||isList||isBye||isDone||isDelete)) {
             throw new DukeException("Command type not valid.");
         }
         if (isTodo||isDeadline||isEvent) {
             if (cmd[1]==null) {
                 throw new DukeException("The description of a "+cmd[0]+" cannot be empty.");
             }
-            if ((cmd[0].equals("deadline")||cmd[0].equals("event"))&&(cmd[3]==null)) {
+            if ((isDeadline||isEvent)&&(cmd[3]==null)) {
                 throw new DukeException("No date/time input for "+cmd[0]+ "."+
                                         " Note: Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at")+" before date/time.");
             }
@@ -137,7 +145,7 @@ public class Duke {
             }
 
         }
-        if (cmd[0].equals("done")) {
+        if (isDone || isDelete) {
             int itemNo;
             try {
                 itemNo = Integer.parseInt(cmd[1]);
