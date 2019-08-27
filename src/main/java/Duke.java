@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -63,11 +64,30 @@ public class Duke {
                         System.out.println("Now you have " + list.size() + " task in the list.");
                     }
                 }
+
+            }
+            try {
+                writeToFile(filepath,list);
+            } catch (IOException e) {
+                System.out.println("Unable to write to file: "+e.getMessage());
             }
             command = input.nextLine();
             formattedCmd = formatCommand(command, list.size());
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
+        String [] toBeSaved = new String[100];
+        FileWriter fw = new FileWriter(filePath);
+        for (int i=0; i<list.size(); i++) {
+            Task item = list.get(i);
+            toBeSaved[i] = item.getInfo();
+        }
+        for (int j=0; j<list.size(); j++) {
+            fw.write(toBeSaved[j]+System.lineSeparator());
+        }
+        fw.close();
     }
 
     // Prints all list items in the string array
@@ -109,8 +129,7 @@ public class Duke {
         // For checking
         /**for (int k=0; k<3; k++) {
             System.out.println(k+". "+cmdFormatted[k]);
-        }**/
-
+        }*/
         try {
             validateCmd(cmdFormatted,n);
         } catch(Exception m) {cmdFormatted[0] = "Error";
