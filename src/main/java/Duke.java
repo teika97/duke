@@ -3,21 +3,26 @@ import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
+        ArrayList<Task> list = new ArrayList<>();
         Scanner input = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<Task>();
-
+        String filepath = "/Users/Kai/Documents/GitHub/duke/src/main/data/data.txt";
+        try {
+            list = loadFile(filepath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
         /**String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        **/
+         + "|  _ \\ _   _| | _____ \n"
+         + "| | | | | | | |/ / _ \\\n"
+         + "| |_| | |_| |   <  __/\n"
+         + "|____/ \\__,_|_|\\_\\___|\n";
+         System.out.println("Hello from\n" + logo);
+         **/
 
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
         String command = input.nextLine();
-        String [] formattedCmd = formatCommand(command, list.size());
+        String[] formattedCmd = formatCommand(command, list.size());
 
         while (!(formattedCmd[0].equals("bye"))) {
             // calls method to print all tasks in list
@@ -30,15 +35,15 @@ public class Duke {
                 list.get(itemNo).isDone = true;
                 System.out.println("Nice! I've marked this task as done:");
                 // print out completed task with indentation
-                System.out.println("   "+list.get(itemNo));
+                System.out.println("   " + list.get(itemNo));
             }
             // delete task from list
             else if (formattedCmd[0].contains("delete")) {
                 int itemNo = Integer.parseInt(formattedCmd[1]) - 1;
                 System.out.println("Noted. I've removed this task:");
-                System.out.println("   "+list.get(itemNo));
+                System.out.println("   " + list.get(itemNo));
                 list.remove(itemNo);
-                System.out.println("Now you have "+list.size()+" in the list.");
+                System.out.println("Now you have " + list.size() + " in the list.");
             }
             else {
                 boolean hasError = false;
@@ -47,17 +52,17 @@ public class Duke {
                         list.add(new Todo(formattedCmd[1]));
                         break;
                     case "deadline":
-                        list.add(new Deadline(formattedCmd[1],formattedCmd[3]));
+                        list.add(new Deadline(formattedCmd[1], formattedCmd[3]));
                         break;
                     case "event":
-                        list.add(new Event(formattedCmd[1],formattedCmd[3]));
+                        list.add(new Event(formattedCmd[1], formattedCmd[3]));
                         break;
                     default:
                         hasError = true;
                 }
                 if (!hasError) {
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("   " + list.get(list.size()-1));
+                    System.out.println("   " + list.get(list.size() - 1));
                     if (list.size() > 1) {
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                     } else {
@@ -77,6 +82,36 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    private static ArrayList <Task> loadFile(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList <Task> list = new ArrayList<>();
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            String [] item = line.split("-");
+            switch (item[0]) {
+                case "T":
+                    list.add(new Todo(item[2]));
+                    break;
+                case "E":
+                    list.add(new Event(item[2],item[3]));
+                    break;
+                case "D":
+                    list.add(new Deadline(item[2],item[3]));
+                    break;
+                default :
+                    System.out.println("Invalid type");
+                    break;
+            }
+            if (item[1].equals("1")) {
+                list.get(list.size()-1).isDone = true;
+            }
+        }
+        for (int i=0; i<list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        return list;
+    }
     private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
         String [] toBeSaved = new String[100];
         FileWriter fw = new FileWriter(filePath);
