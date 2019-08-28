@@ -1,4 +1,6 @@
+import java.text.ParseException;
 import java.util.*;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     public static void main(String[] args) {
@@ -46,10 +48,23 @@ public class Duke {
                         list.add(new Todo(formattedCmd[1]));
                         break;
                     case "deadline":
-                        list.add(new Deadline(formattedCmd[1],formattedCmd[3]));
+                        String convertedDate;
+                        try {
+                            convertedDate = setDate(formattedCmd[3]);
+                        } catch (ParseException e) {
+                            System.out.println("Warning - Unable to format date/time input: "+formattedCmd[3]);
+                            convertedDate = formattedCmd[3];
+                        }
+                        list.add(new Deadline(formattedCmd[1],convertedDate));
                         break;
                     case "event":
-                        list.add(new Event(formattedCmd[1],formattedCmd[3]));
+                        try {
+                            convertedDate = setDate(formattedCmd[3]);
+                        } catch (ParseException e) {
+                            System.out.println("Warning - Unable to format date/time input: "+formattedCmd[3]);
+                            convertedDate = formattedCmd[3];
+                        }
+                        list.add(new Event(formattedCmd[1],convertedDate));
                         break;
                     default:
                         hasError = true;
@@ -68,6 +83,16 @@ public class Duke {
             formattedCmd = formatCommand(command, list.size());
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    // Reformat date/time input into (dd MMMM, yyyy hh a) format e.g. 12 December, 2019, 06pm
+    // Adapted from https://stackoverflow.com/questions/10308720/java-change-date-format-from-custom-date-to-mm-dd-yyyy
+    private static String setDate(String input) throws ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy, hh a");
+        Date convertedDate = null;
+        convertedDate = parser.parse(input);
+        return formatter.format(convertedDate);
     }
 
     // Prints all list items in the string array
