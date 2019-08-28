@@ -1,4 +1,4 @@
-T-1-be happy
-D-0-project report-2pm Monay
-T-1-buy books
-E-0-night swimming-Sunday 9pm
+T-0-buy books
+T-0-buy groceries
+E-0-birthday party-29 August, 2019, 06:00 PM
+D-0-project report-31 August, 2019, 11:59 PM

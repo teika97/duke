@@ -1,6 +1,9 @@
 public class DukeException extends Exception {
+    protected String err;
     DukeException(String s) {
-        super(s);
-        System.out.println("DukeException: "+"\u2639"+ " OOPS!!! "+s);
+        this.err = s;
+    }
+    public String getMessage() {
+        return "DukeException: "+"\u2639"+ " OOPS!!! "+err;
     }
 }
