@@ -1,5 +1,10 @@
+import java.text.ParseException;
 import java.util.*;
+<<<<<<< HEAD
 import java.io.*;
+=======
+import java.text.SimpleDateFormat;
+>>>>>>> branch-level-8
 
 public class Duke {
     public static void main(String[] args) {
@@ -52,10 +57,30 @@ public class Duke {
                         list.add(new Todo(formattedCmd[1]));
                         break;
                     case "deadline":
+<<<<<<< HEAD
                         list.add(new Deadline(formattedCmd[1], formattedCmd[3]));
                         break;
                     case "event":
                         list.add(new Event(formattedCmd[1], formattedCmd[3]));
+=======
+                        String convertedDate;
+                        try {
+                            convertedDate = setDate(formattedCmd[3]);
+                        } catch (ParseException e) {
+                            System.out.println("Warning - Unable to format date/time input: "+formattedCmd[3]);
+                            convertedDate = formattedCmd[3];
+                        }
+                        list.add(new Deadline(formattedCmd[1],convertedDate));
+                        break;
+                    case "event":
+                        try {
+                            convertedDate = setDate(formattedCmd[3]);
+                        } catch (ParseException e) {
+                            System.out.println("Warning - Unable to format date/time input: "+formattedCmd[3]);
+                            convertedDate = formattedCmd[3];
+                        }
+                        list.add(new Event(formattedCmd[1],convertedDate));
+>>>>>>> branch-level-8
                         break;
                     default:
                         hasError = true;
@@ -82,6 +107,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+<<<<<<< HEAD
     private static ArrayList <Task> loadFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -123,6 +149,16 @@ public class Duke {
             fw.write(toBeSaved[j]+System.lineSeparator());
         }
         fw.close();
+=======
+    // Reformat date/time input into (dd MMMM, yyyy hh a) format e.g. 12 December, 2019, 06pm
+    // Adapted from https://stackoverflow.com/questions/10308720/java-change-date-format-from-custom-date-to-mm-dd-yyyy
+    private static String setDate(String input) throws ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy, hh a");
+        Date convertedDate = null;
+        convertedDate = parser.parse(input);
+        return formatter.format(convertedDate);
+>>>>>>> branch-level-8
     }
 
     // Prints all list items in the string array
