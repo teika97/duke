@@ -47,7 +47,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/Kai/Documents/GitHub/duke/src/main/data/data.txt").run();
+        new Duke("/Users/Kai/Documents/GitHub/duke/data/data.txt").run();
     }
 
 

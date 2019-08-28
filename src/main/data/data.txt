@@ -1,4 +1,0 @@
-T-0-buy books
-T-0-buy groceries
-E-0-birthday party-29 August, 2019, 06:00 PM
-D-0-project report-31 August, 2019, 11:59 PM
