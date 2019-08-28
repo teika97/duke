@@ -1,10 +1,7 @@
 import java.text.ParseException;
 import java.util.*;
-<<<<<<< HEAD
 import java.io.*;
-=======
 import java.text.SimpleDateFormat;
->>>>>>> branch-level-8
 
 public class Duke {
     public static void main(String[] args) {
@@ -52,18 +49,12 @@ public class Duke {
             }
             else {
                 boolean hasError = false;
+                String convertedDate;
                 switch (formattedCmd[0]) {
                     case "todo":
                         list.add(new Todo(formattedCmd[1]));
                         break;
                     case "deadline":
-<<<<<<< HEAD
-                        list.add(new Deadline(formattedCmd[1], formattedCmd[3]));
-                        break;
-                    case "event":
-                        list.add(new Event(formattedCmd[1], formattedCmd[3]));
-=======
-                        String convertedDate;
                         try {
                             convertedDate = setDate(formattedCmd[3]);
                         } catch (ParseException e) {
@@ -80,7 +71,6 @@ public class Duke {
                             convertedDate = formattedCmd[3];
                         }
                         list.add(new Event(formattedCmd[1],convertedDate));
->>>>>>> branch-level-8
                         break;
                     default:
                         hasError = true;
@@ -107,7 +97,6 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-<<<<<<< HEAD
     private static ArrayList <Task> loadFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -118,47 +107,47 @@ public class Duke {
             switch (item[0]) {
                 case "T":
                     list.add(new Todo(item[2]));
+                    if (item[1].equals("1")) {
+                        list.get(list.size()-1).isDone = true;
+                    }
                     break;
                 case "E":
                     list.add(new Event(item[2],item[3]));
+                    if (item[1].equals("1")) {
+                        list.get(list.size()-1).isDone = true;
+                    }
                     break;
                 case "D":
                     list.add(new Deadline(item[2],item[3]));
-                    break;
-                default :
-                    System.out.println("Invalid type");
+                    if (item[1].equals("1")) {
+                        list.get(list.size()-1).isDone = true;
+                    }
                     break;
             }
-            if (item[1].equals("1")) {
-                list.get(list.size()-1).isDone = true;
-            }
-        }
-        for (int i=0; i<list.size(); i++) {
-            System.out.println(list.get(i));
         }
         return list;
     }
     private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
-        String [] toBeSaved = new String[100];
+        String[] toBeSaved = new String[100];
         FileWriter fw = new FileWriter(filePath);
-        for (int i=0; i<list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             Task item = list.get(i);
             toBeSaved[i] = item.getInfo();
         }
-        for (int j=0; j<list.size(); j++) {
-            fw.write(toBeSaved[j]+System.lineSeparator());
+        for (int j = 0; j < list.size(); j++) {
+            fw.write(toBeSaved[j] + System.lineSeparator());
         }
         fw.close();
-=======
+    }
     // Reformat date/time input into (dd MMMM, yyyy hh a) format e.g. 12 December, 2019, 06pm
     // Adapted from https://stackoverflow.com/questions/10308720/java-change-date-format-from-custom-date-to-mm-dd-yyyy
+
     private static String setDate(String input) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy, hh a");
         Date convertedDate = null;
         convertedDate = parser.parse(input);
         return formatter.format(convertedDate);
->>>>>>> branch-level-8
     }
 
     // Prints all list items in the string array
@@ -171,7 +160,7 @@ public class Duke {
     }
 
     // Reformats command line based on command type i.e. todo, deadline, event
-    private static String[] formatCommand (String cmd, int n) {
+    private static String[] formatCommand(String cmd, int n) {
         String [] cmdBreakdown = cmd.split(" ");
         // Reformatted command only has command type, description, /by or /at and time
         String [] cmdFormatted = new String[4];
