@@ -5,7 +5,9 @@ import java.util.Date;
 public class Parser {
     boolean isTodo, isDeadline, isEvent, isList,isBye,isDone,isDelete;
     String [] cmdBreakdown;
+    public void Parser() {
 
+    }
     // Reformats command line based on command type i.e. todo, deadline, event
     public Command parseCommand(String cmd, int n) throws DukeException{
         cmdBreakdown = cmd.split(" ");
@@ -58,7 +60,7 @@ public class Parser {
             try {
                 convertedDate = setDate(cmdFormatted[3]);
             } catch (ParseException e) {
-                System.out.println("Warning - Unable to format date/time input: "+cmdFormatted[3]);
+                System.out.println("Warning - Unable to format date/time input.");
                 convertedDate = cmdFormatted[3];
             }
             finalCmd = new AddCommand(cmdFormatted[0],cmdFormatted[1],convertedDate);
@@ -75,7 +77,7 @@ public class Parser {
 
     // Reformat date/time input into (dd MMMM, yyyy hh a) format e.g. 12 December, 2019, 06pm
     // Adapted from https://stackoverflow.com/questions/10308720/java-change-date-format-from-custom-date-to-mm-dd-yyyy
-    private static String setDate(String input) throws ParseException {
+    public static String setDate(String input) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy, hh:mm a");
         Date convertedDate = null;
