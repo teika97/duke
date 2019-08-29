@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents all methods related to storage
+ */
 public class Storage {
     protected File f;
     protected String filePath;
@@ -13,6 +16,13 @@ public class Storage {
         this.filePath = filePath;
         this.f = new File(filePath);
     }
+
+    /**
+     * Returns list of all tasks based on file content.
+     * If file not found, throws FileNotFoundException.
+     * @return List of all tasks.
+     * @throws FileNotFoundException If file is not found.
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
         Scanner s = new Scanner(f);
         ArrayList <Task> list = new ArrayList<>();
@@ -42,6 +52,12 @@ public class Storage {
         }
         return list;
     }
+
+    /**
+     * Overwrites file content with data of all tasks in list.
+     * @param list List of all tasks.
+     * @throws IOException If file is not found.
+     */
     public void writeToFile(ArrayList<Task> list) throws IOException {
         String[] toBeSaved = new String[100];
         FileWriter fw = new FileWriter(this.filePath);

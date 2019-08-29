@@ -1,5 +1,7 @@
-import java.text.ParseException;
-
+/**
+ * Represents an AddCommand, an extension of the Command. A <code>AddCommand</code>
+ * object corresponds to a type, description, date represented by three strings.
+ */
 public class AddCommand extends Command{
     protected String description;
     protected String dateTime;
@@ -10,6 +12,12 @@ public class AddCommand extends Command{
         this.dateTime = dateTime;
     }
 
+    /**
+     * Adds the new task into the list.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(taskList tasks, Ui ui, Storage storage) {
         switch(type) {

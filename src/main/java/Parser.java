@@ -2,13 +2,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents all methods related to parsing of commands.
+ */
 public class Parser {
     boolean isTodo, isDeadline, isEvent, isList,isBye,isDone,isDelete;
     String [] cmdBreakdown;
     public void Parser() {
 
     }
-    // Reformats command line based on command type i.e. todo, deadline, event
+
+    /**
+     * Returns command based on the command type e.g. todo, deadline, event, etc.
+     * Validates command, if not valid, DukeException is thrown.
+     * @param cmd Command string based on user input.
+     * @param n Total no. of tasks in list.
+     * @return Command.
+     * @throws DukeException If command input is not valid.
+     */
     public Command parseCommand(String cmd, int n) throws DukeException{
         cmdBreakdown = cmd.split(" ");
         // Reformatted command only has command type, description, /by or /at and time
@@ -75,8 +86,13 @@ public class Parser {
         return finalCmd;
     }
 
-    // Reformat date/time input into (dd MMMM, yyyy hh a) format e.g. 12 December, 2019, 06pm
     // Adapted from https://stackoverflow.com/questions/10308720/java-change-date-format-from-custom-date-to-mm-dd-yyyy
+    /**
+     * Returns translated date/time input into (dd MMMM, yyyy, hh:mm a) format e.g. 12 December, 2019, 06:00 PM.
+     * @param input Date from user input.
+     * @return Translated Date.
+     * @throws ParseException If user input is unparseable.
+     */
     public static String setDate(String input) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy, hh:mm a");
@@ -85,6 +101,13 @@ public class Parser {
         return formatter.format(convertedDate);
     }
 
+    /**
+     * Checks if command input from user is valid.
+     * If not, throws DukeException.
+     * @param cmd Command string array reformatted from user input.
+     * @param n Total no. of tasks in list.
+     * @throws DukeException If command input is not valid.
+     */
     public void validateCmd(String [] cmd, int n) throws DukeException {
         // validate user input command for following requirements
 

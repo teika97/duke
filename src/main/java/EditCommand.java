@@ -1,3 +1,7 @@
+/**
+ * Represents EditCommand, an extension of the Command class. A <code>EditCommand</code>
+ * object corresponds to type and itemNo represented by two strings.
+ */
 public class EditCommand extends Command{
     protected String itemNo;
 
@@ -6,8 +10,13 @@ public class EditCommand extends Command{
         this.itemNo = itemNo;
     }
 
+    /**
+     * Changes status of a task to done in list based on the index given.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     @Override
-    // marks tasks as done for the done command
     public void execute(taskList tasks, Ui ui, Storage storage) {
         int item = Integer.parseInt(itemNo) - 1;
         tasks.list.get(item).isDone = true;

@@ -1,3 +1,7 @@
+/**
+ * Represents a DeleteCommand, an extension of the Command class. A <code>DeleteCommand</code>
+ * object corresponds to a type and itemNo represented by two strings.
+ */
 public class DeleteCommand extends Command{
     protected String itemNo;
 
@@ -6,8 +10,13 @@ public class DeleteCommand extends Command{
         this.itemNo = itemNo;
     }
 
+    /**
+     * Removes task from list based on index given.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     @Override
-    // delete task from list
     public void execute(taskList tasks, Ui ui, Storage storage) {
         int item = Integer.parseInt(itemNo) - 1;
         System.out.println("Noted. I've removed this task:");
