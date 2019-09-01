@@ -4,7 +4,6 @@ public class taskList {
     protected ArrayList<Task> list;
 
     public taskList (ArrayList<Task> loadFile) {
-
         list = loadFile;
     }
     public int getSize () {
