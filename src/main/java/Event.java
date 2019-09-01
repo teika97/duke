@@ -7,9 +7,10 @@ public class Event extends Task{
         this.at = at;
         this.type = "E";
     }
+
     @Override
     public String getInfo() {
-        return this.type+"-"+super.getInfo()+"-"+this.at;
+        return this.type + "-" + super.getInfo() + "-" + this.at;
     }
 
     @Override

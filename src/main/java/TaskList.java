@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class taskList {
+public class TaskList {
     protected ArrayList<Task> list;
 
-    public taskList (ArrayList<Task> loadFile) {
-
+    public TaskList(ArrayList<Task> loadFile) {
         list = loadFile;
     }
+
     public int getSize () {
         return list.size();
     }

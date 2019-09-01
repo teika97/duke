@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 public class AddCommandTest {
-    private taskList tasksTest = new taskList(new ArrayList<Task>());
+    private TaskList tasksTest = new TaskList(new ArrayList<Task>());
     private Ui uiTest = new Ui();
     private Storage storageTest = new Storage("stuff");
     @Test

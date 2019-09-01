@@ -7,9 +7,10 @@ public class Deadline extends Task{
         this.by = by;
         this.type = "D";
     }
+
     @Override
     public String getInfo() {
-        return this.type+"-"+super.getInfo()+"-"+this.by;
+        return this.type + "-" + super.getInfo() + "-" + this.by;
     }
 
     @Override

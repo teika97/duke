@@ -5,9 +5,10 @@ public class Todo extends Task{
         super(description);
         this.type = "T";
     }
+
     @Override
     public String getInfo() {
-        return this.type+"-"+super.getInfo();
+        return this.type + "-" + super.getInfo();
     }
 
     @Override
