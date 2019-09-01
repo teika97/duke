@@ -4,9 +4,6 @@ import java.util.Scanner;
  * Represents all methods related to user interface.
  */
 public class Ui {
-    public Ui () {
-    }
-
     /**
      * Prints loadingError if unable to find file to load content.
      */

@@ -1,12 +1,11 @@
-import javax.swing.*;
-import java.text.ParseException;
-import java.util.*;
-import java.io.*;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     private Storage storage;
-    private taskList tasks;
+    private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
@@ -14,11 +13,12 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
+
         try {
-            tasks = new taskList(storage.loadFile());
+            tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
-            tasks = new taskList(new ArrayList<Task>());
+            tasks = new TaskList(new ArrayList<Task>());
         }
     }
 
@@ -30,7 +30,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = parser.parseCommand(fullCommand,tasks.getSize());
-                c.execute(tasks,ui,storage);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -49,7 +49,5 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("/Users/Kai/Documents/GitHub/duke/data/data.txt").run();
     }
-
-
 }
 

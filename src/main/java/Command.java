@@ -3,6 +3,7 @@
  */
 public class Command {
     protected String type;
+
     public Command (String type) {
         this.type = type;
     }
@@ -24,6 +25,6 @@ public class Command {
      * @param ui
      * @param storage
      */
-    public void execute(taskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
     }
 }

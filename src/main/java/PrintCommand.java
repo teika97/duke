@@ -14,11 +14,11 @@ public class PrintCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(taskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("Here are the tasks in your list:");
-        for (int i=0; i<tasks.list.size(); i++) {
-            int listNum = i+1;
-            System.out.println(listNum+"."+tasks.list.get(i));
+        for (int i = 0; i < tasks.list.size(); i++) {
+            int listNum = i + 1;
+            System.out.println(listNum + "." + tasks.list.get(i));
         }
     }
 }

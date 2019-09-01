@@ -26,9 +26,9 @@ public class Task {
      */
     public String getInfo() {
         if (this.isDone) {
-            return "1"+"-"+this.description;
+            return "1" + "-" + this.description;
         }
-        return "0"+"-"+this.description;
+        return "0" + "-" + this.description;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
      * @return Status icon and description.
      */
     public String toString() {
-        return "["+this.getStatusIcon()+"]"+" "+this.description;
+        return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
 }
 

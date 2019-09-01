@@ -3,10 +3,10 @@ import java.util.ArrayList;
 /**
  * Represents the list of all tasks.
  */
-public class taskList {
+public class TaskList {
     protected ArrayList<Task> list;
 
-    public taskList (ArrayList<Task> loadFile) {
+    public TaskList (ArrayList<Task> loadFile) {
         list = loadFile;
     }
 
@@ -17,5 +17,4 @@ public class taskList {
     public int getSize () {
         return list.size();
     }
-
 }

@@ -3,7 +3,8 @@
  */
 public class DukeException extends Exception {
     protected String err;
-    DukeException(String s) {
+
+    public DukeException(String s) {
         this.err = s;
     }
 

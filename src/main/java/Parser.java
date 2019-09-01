@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 /**
@@ -7,10 +8,7 @@ import java.util.Date;
  */
 public class Parser {
     boolean isTodo, isDeadline, isEvent, isList,isBye,isDone,isDelete;
-    String [] cmdBreakdown;
-    public void Parser() {
-
-    }
+    String [] cmdUnits;
 
     /**
      * Returns command based on the command type e.g. todo, deadline, event, etc.
@@ -21,66 +19,77 @@ public class Parser {
      * @throws DukeException If command input is not valid.
      */
     public Command parseCommand(String cmd, int n) throws DukeException{
-        cmdBreakdown = cmd.split(" ");
-        // Reformatted command only has command type, description, /by or /at and time
-        String [] cmdFormatted = new String[4];
+        // Split all words in the command string into cmdUnits
+        cmdUnits = cmd.split(" ");
+
+        // Initialize variables used for reformatting command
+        // Command has only command type, description, "/by" or "/at" and time
+        String [] finalCmdUnits = new String[4];
         Command finalCmd = null;
         int i = 0;
         boolean continuing = false;
 
-        // Directly input command type into first element of cmdFormatted
-        cmdFormatted[i] = this.cmdBreakdown[i];
-        isTodo = cmdFormatted[0].equals("todo");
-        isDeadline = cmdFormatted[0].equals("deadline");
-        isEvent = cmdFormatted[0].equals("event");
-        isList = cmdFormatted[0].equals("list");
-        isBye = cmdFormatted[0].equals("bye");
-        isDone = cmdFormatted[0].equals("done");
-        isDelete = cmdFormatted[0].equals("delete");
-        i++;
+        // First element of cmdUnits is Command type
+        // Input into first element of finalCmdUnits
+        finalCmdUnits[i] = this.cmdUnits[i];
 
-        for (int j=1; j<cmdBreakdown.length; j++) {
-            if (cmdBreakdown[j].contains("/")) {
+        // Initialize all boolean variables based on command type
+        isTodo = finalCmdUnits[0].equals("todo");
+        isDeadline = finalCmdUnits[0].equals("deadline");
+        isEvent = finalCmdUnits[0].equals("event");
+        isList = finalCmdUnits[0].equals("list");
+        isBye = finalCmdUnits[0].equals("bye");
+        isDone = finalCmdUnits[0].equals("done");
+        isDelete = finalCmdUnits[0].equals("delete");
+
+        i++;
+        for (int j = 1; j < cmdUnits.length; j++) {
+            // If not separated by /by or /at
+            // Words in cmdUnits concatenated into same finalCmdUnit
+            // /by or /at saved as a separate variable, finalCmdUnits[2]
+            if (cmdUnits[j].contains("/")) {
                 i++;
-                cmdFormatted[i] = cmdBreakdown[j];
+                finalCmdUnits[i] = cmdUnits[j];
                 i++;
                 continuing = false;
-            }
-            else {
+            } else {
                 if (!continuing) {
-                    cmdFormatted[i] = cmdBreakdown[j];
-                }
-                else {
-                    cmdFormatted[i] = cmdFormatted[i].concat(" "+cmdBreakdown[j]);
+                    finalCmdUnits[i] = cmdUnits[j];
+                } else {
+                    finalCmdUnits[i] = finalCmdUnits[i].concat(" "+ cmdUnits[j]);
                 }
                 continuing = true;
             }
         }
-        validateCmd(cmdFormatted, n);
+
+        // Check command does not violate any input format restrictions
+        validateCmd(finalCmdUnits, n);
+
+        // Create new command variable based on command type
         if (isBye) {
-            finalCmd = new Command(cmdFormatted[0]);
+            finalCmd = new Command(finalCmdUnits[0]);
         }
         if (isList) {
-            finalCmd = new PrintCommand(cmdFormatted[0]);
+            finalCmd = new PrintCommand(finalCmdUnits[0]);
         }
         if (isTodo) {
-            finalCmd = new AddCommand(cmdFormatted[0],cmdFormatted[1],null);
+            finalCmd = new AddCommand(finalCmdUnits[0], finalCmdUnits[1], null);
         }
         if (isDeadline || isEvent) {
             String convertedDate;
             try {
-                convertedDate = setDate(cmdFormatted[3]);
+                convertedDate = setDate(finalCmdUnits[3]);
             } catch (ParseException e) {
                 System.out.println("Warning - Unable to format date/time input.");
-                convertedDate = cmdFormatted[3];
+                convertedDate = finalCmdUnits[3];
             }
-            finalCmd = new AddCommand(cmdFormatted[0],cmdFormatted[1],convertedDate);
+            finalCmd = new AddCommand(finalCmdUnits[0], finalCmdUnits[1], convertedDate);
         }
         if (isDone) {
-            finalCmd = new EditCommand(cmdFormatted[0], cmdFormatted[1]);
+            finalCmd = new EditCommand(finalCmdUnits[0], finalCmdUnits[1]);
         }
         if (isDelete) {
-            finalCmd = new DeleteCommand(cmdFormatted[0], cmdFormatted[1]);
+            finalCmd = new DeleteCommand(finalCmdUnits[0], finalCmdUnits[1]);
         }
 
         return finalCmd;
@@ -109,21 +118,20 @@ public class Parser {
      * @throws DukeException If command input is not valid.
      */
     public void validateCmd(String [] cmd, int n) throws DukeException {
-        // validate user input command for following requirements
-
-        if (!(isTodo||isDeadline||isEvent||isList||isBye||isDone||isDelete)) {
+        // Throw DukeException based on which requirement it violates
+        if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete)) {
             throw new DukeException("Command type not valid.");
         }
-        if (isTodo||isDeadline||isEvent) {
-            if (cmd[1]==null) {
-                throw new DukeException("The description of a "+cmd[0]+" cannot be empty.");
+        if (isTodo || isDeadline || isEvent) {
+            if (cmd[1] == null) {
+                throw new DukeException("The description of a " + cmd[0] + " cannot be empty.");
             }
-            if ((isDeadline||isEvent)&&(cmd[3]==null)) {
-                throw new DukeException("No date/time input for "+cmd[0]+ "."+
-                        " Note: Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at")+" before date/time.");
+            if ((isDeadline || isEvent) && (cmd[3] == null)) {
+                throw new DukeException("No date/time input for " + cmd[0] + "." + " Note: Input for "
+                        + cmd[0] + " must have " + (isDeadline? "/by" : "/at") + " before date/time.");
             }
-            if ((isDeadline||isEvent)&&!(cmd[2].equals(isDeadline? "/by" : "/at"))) {
-                throw new DukeException("Input for "+cmd[0]+" must have "+(isDeadline? "/by" : "/at")+".");
+            if ((isDeadline || isEvent) && !(cmd[2].equals(isDeadline? "/by" : "/at"))) {
+                throw new DukeException("Input for " + cmd[0] + " must have " + (isDeadline? "/by" : "/at") + ".");
             }
 
         }
@@ -135,9 +143,9 @@ public class Parser {
                 throw new DukeException("Unable to format due to improper input.");
             }
             if (itemNo > n) {
-                throw new DukeException("Task "+itemNo+" not found in list.");
+                throw new DukeException("Task " + itemNo + " not found in list.");
             }
-            if (!(cmd[2]==null)||!(cmd[3]==null)) {
+            if (!(cmd[2] == null) || !(cmd[3] == null)) {
                 throw new DukeException("Unable to format due to improper input.");
             }
         }

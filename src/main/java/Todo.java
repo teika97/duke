@@ -16,7 +16,7 @@ public class Todo extends Task{
      */
     @Override
     public String getInfo() {
-        return this.type+"-"+super.getInfo();
+        return this.type + "-" + super.getInfo();
     }
 
     /**
