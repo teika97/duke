@@ -7,7 +7,7 @@ import java.util.Date;
  * Represents all methods related to parsing of commands.
  */
 public class Parser {
-    boolean isTodo, isDeadline, isEvent, isList,isBye,isDone,isDelete;
+    boolean isTodo, isDeadline, isEvent, isList, isBye, isDone, isDelete, isFind;
     String [] cmdUnits;
 
     /**
@@ -41,6 +41,7 @@ public class Parser {
         isBye = finalCmdUnits[0].equals("bye");
         isDone = finalCmdUnits[0].equals("done");
         isDelete = finalCmdUnits[0].equals("delete");
+        isFind = finalCmdUnits[0].equals("find");
 
         i++;
         for (int j = 1; j < cmdUnits.length; j++) {
@@ -91,6 +92,9 @@ public class Parser {
         if (isDelete) {
             finalCmd = new DeleteCommand(finalCmdUnits[0], finalCmdUnits[1]);
         }
+        if (isFind) {
+            finalCmd = new FindCommand(finalCmdUnits[0], finalCmdUnits[1]);
+        }
 
         return finalCmd;
     }
@@ -119,7 +123,7 @@ public class Parser {
      */
     public void validateCmd(String [] cmd, int n) throws DukeException {
         // Throw DukeException based on which requirement it violates
-        if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete)) {
+        if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete || isFind)) {
             throw new DukeException("Command type not valid.");
         }
         if (isTodo || isDeadline || isEvent) {
@@ -149,6 +153,11 @@ public class Parser {
                 throw new DukeException("Unable to format due to improper input.");
             }
         }
+        if (isFind) {
+            String [] keyWords = cmd[1].split(" ");
+            if (keyWords.length > 1) {
+                throw new DukeException("Only one keyword allowed.");
+            }
+        }
     }
-
 }
