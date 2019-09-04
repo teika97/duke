@@ -4,7 +4,7 @@
 public class Command {
     protected String type;
 
-    public Command (String type) {
+    public Command(String type) {
         this.type = type;
     }
 
@@ -21,9 +21,9 @@ public class Command {
 
     /**
      * Empty method to be overridden based on command type.
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks Class dealing with arraylist of tasks
+     * @param ui Class dealing with User interface
+     * @param storage Class dealing with storage of task list
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
     }

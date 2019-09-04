@@ -2,10 +2,10 @@
  * Represents a todo task. A <code>Todo</code> object
  * corresponds to a task type represented by a string.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     protected String type;
 
-    public Todo (String description) {
+    public Todo(String description) {
         super(description);
         this.type = "T";
     }

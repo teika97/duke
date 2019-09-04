@@ -2,11 +2,16 @@
  * Represents a deadline task. A <code>Deadline</code> object
  * corresponds to a deadline and task type represented by two strings.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected String type;
 
-    public Deadline (String description, String by) {
+    /**
+     * Constructor.
+     * @param description task description
+     * @param by time by which item to be completed
+     */
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
         this.type = "D";

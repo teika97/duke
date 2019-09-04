@@ -7,7 +7,14 @@ import java.util.Date;
  * Represents all methods related to parsing of commands.
  */
 public class Parser {
-    boolean isTodo, isDeadline, isEvent, isList, isBye, isDone, isDelete, isFind;
+    boolean isTodo;
+    boolean isDeadline;
+    boolean isEvent;
+    boolean isList;
+    boolean isBye;
+    boolean isDone;
+    boolean isDelete;
+    boolean isFind;
     String [] cmdUnits;
 
     /**
@@ -18,7 +25,7 @@ public class Parser {
      * @return Command.
      * @throws DukeException If command input is not valid.
      */
-    public Command parseCommand(String cmd, int n) throws DukeException{
+    public Command parseCommand(String cmd, int n) throws DukeException {
         // Split all words in the command string into cmdUnits
         cmdUnits = cmd.split(" ");
 
@@ -57,7 +64,7 @@ public class Parser {
                 if (!continuing) {
                     finalCmdUnits[i] = cmdUnits[j];
                 } else {
-                    finalCmdUnits[i] = finalCmdUnits[i].concat(" "+ cmdUnits[j]);
+                    finalCmdUnits[i] = finalCmdUnits[i].concat(" " + cmdUnits[j]);
                 }
                 continuing = true;
             }
@@ -132,10 +139,10 @@ public class Parser {
             }
             if ((isDeadline || isEvent) && (cmd[3] == null)) {
                 throw new DukeException("No date/time input for " + cmd[0] + "." + " Note: Input for "
-                        + cmd[0] + " must have " + (isDeadline? "/by" : "/at") + " before date/time.");
+                        + cmd[0] + " must have " + (isDeadline ? "/by" : "/at") + " before date/time.");
             }
-            if ((isDeadline || isEvent) && !(cmd[2].equals(isDeadline? "/by" : "/at"))) {
-                throw new DukeException("Input for " + cmd[0] + " must have " + (isDeadline? "/by" : "/at") + ".");
+            if ((isDeadline || isEvent) && !(cmd[2].equals(isDeadline ? "/by" : "/at"))) {
+                throw new DukeException("Input for " + cmd[0] + " must have " + (isDeadline ? "/by" : "/at") + ".");
             }
 
         }

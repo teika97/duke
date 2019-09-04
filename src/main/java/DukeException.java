@@ -13,6 +13,6 @@ public class DukeException extends Exception {
      * @return Duke error message.
      */
     public String getMessage() {
-        return "DukeException: "+"\u2639"+ " OOPS!!! "+err;
+        return "DukeException: " + "\u2639" + " OOPS!!! " + err;
     }
 }

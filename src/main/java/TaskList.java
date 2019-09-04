@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> list;
 
-    public TaskList (ArrayList<Task> loadFile) {
+    public TaskList(ArrayList<Task> loadFile) {
         list = loadFile;
     }
 
@@ -14,7 +14,7 @@ public class TaskList {
      * Returns total no. of tasks in the list.
      * @return Total no. of tasks.
      */
-    public int getSize () {
+    public int getSize() {
         return list.size();
     }
 }

@@ -7,15 +7,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Represents all methods related to storage
+ * Represents all methods related to storage.
  */
 public class Storage {
-    protected File f;
+    protected File ldFile;
     protected String filePath;
 
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.f = new File(filePath);
+        this.ldFile = new File(filePath);
     }
 
     /**
@@ -25,8 +25,8 @@ public class Storage {
      * @throws FileNotFoundException If file is not found.
      */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
-        Scanner s = new Scanner(f);
-        ArrayList <Task> list = new ArrayList<>();
+        Scanner s = new Scanner(ldFile);
+        ArrayList<Task> list = new ArrayList<>();
 
         while (s.hasNextLine()) {
             // Split all words in a row from file
@@ -35,24 +35,26 @@ public class Storage {
 
             // Create and add task object into TaskList based on row data
             switch (item[0]) {
-                case "T":
-                    list.add(new Todo(item[2]));
-                    if (item[1].equals("1")) {
-                        list.get(list.size()-1).isDone = true;
-                    }
-                    break;
-                case "E":
-                    list.add(new Event(item[2], item[3]));
-                    if (item[1].equals("1")) {
-                        list.get(list.size()-1).isDone = true;
-                    }
-                    break;
-                case "D":
-                    list.add(new Deadline(item[2], item[3]));
-                    if (item[1].equals("1")) {
-                        list.get(list.size()-1).isDone = true;
-                    }
-                    break;
+            case "T":
+                list.add(new Todo(item[2]));
+                if (item[1].equals("1")) {
+                    list.get(list.size() - 1).isDone = true;
+                }
+                break;
+            case "E":
+                list.add(new Event(item[2], item[3]));
+                if (item[1].equals("1")) {
+                    list.get(list.size() - 1).isDone = true;
+                }
+                break;
+            case "D":
+                list.add(new Deadline(item[2], item[3]));
+                if (item[1].equals("1")) {
+                    list.get(list.size() - 1).isDone = true;
+                }
+                break;
+            default:
+                break;
             }
         }
         return list;

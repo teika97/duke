@@ -3,11 +3,16 @@
  * corresponds to a time and a task type represented by two
  * strings.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
     protected String type;
 
-    public Event (String description, String at) {
+    /**
+     * Constructor.
+     * @param description task description
+     * @param at time of event
+     */
+    public Event(String description, String at) {
         super(description);
         this.at = at;
         this.type = "E";

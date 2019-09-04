@@ -5,6 +5,11 @@ public class FindCommand extends Command {
     protected boolean inList;
     protected ArrayList<Task> foundTasks = new ArrayList<Task>();
 
+    /**
+     * Constructor.
+     * @param type type of command
+     * @param keyWord word to be matched to all tasks
+     */
     public FindCommand(String type, String keyWord) {
         super(type);
         this.keyWord = keyWord;
@@ -18,7 +23,7 @@ public class FindCommand extends Command {
             String desc = tasks.list.get(i).description;
             Task foundTask = tasks.list.get(i);
             boolean hasKeyWord = desc.contains(keyWord);
-            if(hasKeyWord) {
+            if (hasKeyWord) {
                 inList = true;
                 foundTasks.add(foundTask);
             }

@@ -9,7 +9,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke (String filePath) {
+    /**
+     * Constructor.
+     * @param filePath location of file
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -22,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

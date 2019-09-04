@@ -2,19 +2,19 @@
  * Represents a DeleteCommand, an extension of the Command class. A <code>DeleteCommand</code>
  * object corresponds to a type and itemNo represented by two strings.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     protected String itemNo;
 
-    public DeleteCommand (String type, String itemNo) {
+    public DeleteCommand(String type, String itemNo) {
         super(type);
         this.itemNo = itemNo;
     }
 
     /**
      * Removes task from list based on index given.
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks Class dealing with arraylist of tasks
+     * @param ui Class dealing with User interface
+     * @param storage Class dealing with storage of task list
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
