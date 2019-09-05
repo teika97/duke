@@ -7,21 +7,23 @@ public class Ui {
     /**
      * Prints loadingError if unable to find file to load content.
      */
-    public void showLoadingError() {
-        new DukeException("Unable to find File!");
+    public String showLoadingError() {
+        DukeException loadingError = new DukeException("Unable to find File!");
+        return loadingError.getMessage();
     }
 
     /**
      * Prints savingError if unable to find file to write content.
      */
-    public void showSavingError() {
-        new DukeException("Unable to save File!");
+    public String showSavingError() {
+        DukeException savingError = new DukeException("Unable to save File!");
+        return savingError.getMessage();
     }
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         /**String logo = " ____        _        \n"
          + "|  _ \\ _   _| | _____ \n"
          + "| | | | | | | |/ / _ \\\n"
@@ -29,8 +31,7 @@ public class Ui {
          + "|____/ \\__,_|_|\\_\\___|\n";
          System.out.println("Hello from\n" + logo);**/
 
-        System.out.println("Hello! I'm Duke\n");
-        System.out.println("What can I do for you?");
+        return "Hello! I'm Duke.\nWhat can I do for you?";
     }
 
     /**
@@ -46,21 +47,21 @@ public class Ui {
      * Prints error message.
      * @param err Error.
      */
-    public void showError(String err) {
-        System.out.println(err);
+    public String showError(String err) {
+        return err;
     }
 
     /**
      * Prints goodbye message.
      */
-    public void sayGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String sayGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints line.
      */
-    public void showLine() {
-        System.out.println("_________________________________________");
+    public String showLine() {
+        return "_________________________________________";
     }
 }

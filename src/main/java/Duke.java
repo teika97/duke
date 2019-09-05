@@ -17,7 +17,6 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
-
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException e) {
@@ -26,35 +25,34 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the Duke program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = parser.parseCommand(fullCommand,tasks.getSize());
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        try {
-            storage.writeToFile(tasks.list);
-        } catch (IOException e) {
-            ui.showSavingError();
-        }
-
+    public String showWelcome() {
+        return ui.showWelcome();
     }
 
-    public static void main(String[] args) {
-        new Duke("/Users/Kai/Documents/GitHub/duke/data/data.txt").run();
+    /**
+     * Runs duke program to get response for user command input.
+     * @param input user command
+     * @return program response
+     */
+    public String getResponse(String input) {
+        String response = "";
+        boolean isExit = false;
+        try {
+            Command c = parser.parseCommand(input,tasks.getSize());
+            response = c.execute(tasks,ui,storage);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            response = ui.showError(e.getMessage());
+        }
+        if (isExit) {
+            response = ui.sayGoodbye();
+            try {
+                storage.writeToFile(tasks.list);
+            } catch (IOException e) {
+                response = ui.showSavingError();
+            }
+        }
+        return response;
     }
 }
 

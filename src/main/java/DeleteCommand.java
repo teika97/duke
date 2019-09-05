@@ -15,15 +15,18 @@ public class DeleteCommand extends Command {
      * @param tasks Class dealing with arraylist of tasks
      * @param ui Class dealing with User interface
      * @param storage Class dealing with storage of task list
+     * @return Output message to console.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int item = Integer.parseInt(itemNo) - 1;
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("   " + tasks.list.get(item));
+
+        String line1 = "Noted. I've removed this task:\n" + "   " + tasks.list.get(item);
 
         tasks.list.remove(item);
 
-        System.out.println("Now you have " + tasks.list.size() + " in the list.");
+        String line2 = "Now you have " + tasks.list.size() + " in the list.";
+
+        return line1 + "\n" + line2;
     }
 }

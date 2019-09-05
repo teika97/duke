@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // Traverse TaskList to find all matching tasks and add into a list
         for (int i = 0; i < tasks.getSize(); i++) {
             String desc = tasks.list.get(i).description;
@@ -28,15 +28,17 @@ public class FindCommand extends Command {
                 foundTasks.add(foundTask);
             }
         }
-
+        String output = "";
         // Print out list of matching tasks
         if (inList) {
-            System.out.println("Here are the matching tasks in your list:");
+            output = "Here are the matching tasks in your list:";
             for (int j = 0; j < foundTasks.size(); j++) {
-                System.out.println((j + 1) + "." + foundTasks.get(j));
+                String itemNo = Integer.toString(j+1);
+                output = output + "\n" + itemNo + "." + foundTasks.get(j);
             }
         } else {
-            System.out.println("No matching tasks found.");
+            output = "No matching tasks found.";
         }
+        return output;
     }
 }

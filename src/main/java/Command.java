@@ -25,6 +25,7 @@ public class Command {
      * @param ui Class dealing with User interface
      * @param storage Class dealing with storage of task list
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "";
     }
 }

@@ -19,13 +19,14 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the new task into the list.
+     * Adds command to list of tasks.
      * @param tasks Class dealing with arraylist of tasks
      * @param ui Class dealing with User interface
      * @param storage Class dealing with storage of task list
+     * @return Output message to console
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         switch (type) {
         case "todo":
             tasks.list.add(new Todo(description));
@@ -40,13 +41,14 @@ public class AddCommand extends Command {
             break;
         }
 
-        // Print standard output to console
-        System.out.println("Got it. I've added this task:");
-        System.out.println("   " + tasks.list.get(tasks.list.size() - 1));
+        // Standard output message to console
+        String line1 = "Got it. I've added this task:\n" + "   " + tasks.list.get(tasks.list.size() - 1);
+        String line2 = "";
         if (tasks.list.size() > 1) {
-            System.out.println("Now you have " + tasks.list.size() + " tasks in the list.");
+            line2 = "Now you have " + tasks.list.size() + " tasks in the list.";
         } else {
-            System.out.println("Now you have " + tasks.list.size() + " task in the list.");
+            line2 = "Now you have " + tasks.list.size() + " task in the list.";
         }
+        return line1 + "\n" + line2;
     }
 }
