@@ -59,6 +59,36 @@ public class Ui {
     }
 
     /**
+     * Print details after adding new task into list.
+     * @param num Number of tasks in list after adding
+     * @param newTask New task added
+     * @return print output
+     */
+    public String printAddedCommand(int num, Task newTask) {
+        String line1 = "Got it. I've added this task:\n" + "   " + newTask;
+        String line2 = "";
+        if (num > 1) {
+            line2 = "Now you have " + num + " tasks in the list.";
+        } else {
+            line2 = "Now you have " + num + " task in the list.";
+        }
+        return line1 + "\n" + line2;
+    }
+
+    /**
+     * Print details after removing task from list.
+     * @param num Number of tasks in list after removing task.
+     * @param removedTask Old task removed
+     * @return print output
+     */
+    public String printRemovalCommand(int num, Task removedTask) {
+        String line1 = "Noted. I've removed this task:\n" + "   " + removedTask;
+        String line2 = "Now you have " + num + " in the list.";
+
+        return line1 + "\n" + line2;
+    }
+
+    /**
      * Prints line.
      */
     public String showLine() {

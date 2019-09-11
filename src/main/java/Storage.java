@@ -31,26 +31,42 @@ public class Storage {
         while (s.hasNextLine()) {
             // Split all words in a row from file
             String line = s.nextLine();
-            String [] item = line.split("-");
+            String [] item = line.split("--");
+
+            String type = item[0];
+            String status = item[1];
+            String desc = item[2];
+            String dateTime;
+
+            final String TODO = "T";
+            final String EVENT = "E";
+            final String DEADLINE = "D";
+            final String DONE = "1";
+            int idx;
 
             // Create and add task object into TaskList based on row data
-            switch (item[0]) {
-            case "T":
-                list.add(new Todo(item[2]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+            switch (type) {
+            case TODO:
+                list.add(new Todo(desc));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
                 }
                 break;
-            case "E":
-                list.add(new Event(item[2], item[3]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+            case EVENT:
+                dateTime = item[3];
+                list.add(new Event(desc, dateTime));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
                 }
                 break;
-            case "D":
-                list.add(new Deadline(item[2], item[3]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+            case DEADLINE:
+                dateTime = item[3];
+                list.add(new Deadline(desc, dateTime));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
                 }
                 break;
             default:
