@@ -51,16 +51,20 @@ public class Parser {
         isFind = finalCmdUnits[0].equals("find");
 
         i++;
+        assert i == 1;
         for (int j = 1; j < cmdUnits.length; j++) {
             // If not separated by /by or /at
             // Words in cmdUnits concatenated into same finalCmdUnit
             // /by or /at saved as a separate variable, finalCmdUnits[2]
             if (cmdUnits[j].contains("/")) {
                 i++;
+                assert i == 2;
                 finalCmdUnits[i] = cmdUnits[j];
                 i++;
+                assert i == 3;
                 continuing = false;
             } else {
+                assert (i == 1 || i == 3);
                 if (!continuing) {
                     finalCmdUnits[i] = cmdUnits[j];
                 } else {

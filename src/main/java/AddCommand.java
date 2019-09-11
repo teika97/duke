@@ -38,6 +38,7 @@ public class AddCommand extends Command {
             tasks.list.add(new Event(description,dateTime));
             break;
         default:
+            assert false : type;
             break;
         }
 
@@ -47,6 +48,7 @@ public class AddCommand extends Command {
         if (tasks.list.size() > 1) {
             line2 = "Now you have " + tasks.list.size() + " tasks in the list.";
         } else {
+            assert tasks.list.size()==1;
             line2 = "Now you have " + tasks.list.size() + " task in the list.";
         }
         return line1 + "\n" + line2;
