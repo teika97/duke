@@ -20,6 +20,8 @@ public class EditCommand extends Command {
     // marks tasks as done for the done command
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         int item = Integer.parseInt(itemNo) - 1;
+        assert item < tasks.list.size();
+
         tasks.list.get(item).isDone = true;
 
         return "Nice! I've marked this task as done:\n" + "   " + tasks.list.get(item);

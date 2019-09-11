@@ -32,28 +32,33 @@ public class Storage {
             // Split all words in a row from file
             String line = s.nextLine();
             String [] item = line.split("-");
+            assert (item[1].equals("1") || item[1].equals("0"));
 
             // Create and add task object into TaskList based on row data
             switch (item[0]) {
             case "T":
+                assert item.length == 3;
                 list.add(new Todo(item[2]));
                 if (item[1].equals("1")) {
                     list.get(list.size() - 1).isDone = true;
                 }
                 break;
             case "E":
+                assert item.length == 4;
                 list.add(new Event(item[2], item[3]));
                 if (item[1].equals("1")) {
                     list.get(list.size() - 1).isDone = true;
                 }
                 break;
             case "D":
+                assert item.length == 4;
                 list.add(new Deadline(item[2], item[3]));
                 if (item[1].equals("1")) {
                     list.get(list.size() - 1).isDone = true;
                 }
                 break;
             default:
+                assert false : item[0];
                 break;
             }
         }

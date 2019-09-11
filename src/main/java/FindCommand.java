@@ -31,12 +31,14 @@ public class FindCommand extends Command {
         String output = "";
         // Print out list of matching tasks
         if (inList) {
+            assert foundTasks.size() > 0;
             output = "Here are the matching tasks in your list:";
             for (int j = 0; j < foundTasks.size(); j++) {
                 String itemNo = Integer.toString(j+1);
                 output = output + "\n" + itemNo + "." + foundTasks.get(j);
             }
         } else {
+            assert foundTasks.size() == 0;
             output = "No matching tasks found.";
         }
         return output;
