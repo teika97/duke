@@ -10,6 +10,15 @@ public class Todo extends Task {
         this.type = "T";
     }
 
+    @Override
+    /**
+     * Returns task type.
+     * @return Task type
+     */
+    public String getType() {
+        return this.type;
+    }
+
     /**
      * Returns task type, status, task description separated by a dash.
      * @return Task information.

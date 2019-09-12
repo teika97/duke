@@ -15,6 +15,7 @@ public class Parser {
     boolean isDone;
     boolean isDelete;
     boolean isFind;
+    boolean isSort;
     String [] cmdUnits;
 
     /**
@@ -49,6 +50,7 @@ public class Parser {
         isDone = finalCmdUnits[0].equals("done");
         isDelete = finalCmdUnits[0].equals("delete");
         isFind = finalCmdUnits[0].equals("find");
+        isSort = finalCmdUnits[0].equals("sort");
 
         i++;
         assert i == 1;
@@ -106,6 +108,9 @@ public class Parser {
         if (isFind) {
             finalCmd = new FindCommand(finalCmdUnits[0], finalCmdUnits[1]);
         }
+        if (isSort) {
+            finalCmd = new SortCommand(finalCmdUnits[0]);
+        }
 
         return finalCmd;
     }
@@ -134,7 +139,7 @@ public class Parser {
      */
     public void validateCmd(String [] cmd, int n) throws DukeException {
         // Throw DukeException based on which requirement it violates
-        if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete || isFind)) {
+        if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete || isFind || isSort)) {
             throw new DukeException("Command type not valid.");
         }
         if (isTodo || isDeadline || isEvent) {

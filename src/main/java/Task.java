@@ -3,7 +3,7 @@
  * corresponds to a description represented by a String and its status
  * represented by a boolean
  */
-public class Task {
+public class Task implements Comparable <Task> {
     protected String description;
     protected boolean isDone;
 
@@ -38,5 +38,41 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
+
+    /**
+     * Returns task type.
+     * @return Task type
+     */
+    public String getType() { return "Task";}
+
+    /**
+     * Returns task description.
+     * @return task description
+     */
+    public String getDesc() {
+        return this.description;
+    }
+
+    /**
+     * Returns date if applicable.
+     * @return date
+     */
+    public String getDate() {
+        return "No date";
+    }
+
+    @Override
+    /**
+     * Compares task descriptions to sort in lexicographical order.
+     */
+    public int compareTo(Task task) {
+        String desc1 = this.getDesc();
+        String desc2 = task.getDesc();
+
+        return desc1.compareTo(desc2);
+    }
+
+
+
 }
 
