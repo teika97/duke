@@ -42,15 +42,11 @@ public class AddCommand extends Command {
             break;
         }
 
-        // Standard output message to console
-        String line1 = "Got it. I've added this task:\n" + "   " + tasks.list.get(tasks.list.size() - 1);
-        String line2 = "";
-        if (tasks.list.size() > 1) {
-            line2 = "Now you have " + tasks.list.size() + " tasks in the list.";
-        } else {
-            assert tasks.list.size()==1;
-            line2 = "Now you have " + tasks.list.size() + " task in the list.";
-        }
-        return line1 + "\n" + line2;
+        int num = tasks.list.size();
+        int idx = num - 1;
+        Task newTask = tasks.list.get(idx);
+
+        return ui.printAddedCommand(num, newTask);
+
     }
 }

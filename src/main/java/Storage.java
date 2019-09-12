@@ -31,30 +31,47 @@ public class Storage {
         while (s.hasNextLine()) {
             // Split all words in a row from file
             String line = s.nextLine();
-            String [] item = line.split("-");
+            String [] item = line.split("--");
             assert (item[1].equals("1") || item[1].equals("0"));
 
+            String type = item[0];
+            String status = item[1];
+            String desc = item[2];
+            String dateTime;
+
+            final String TODO = "T";
+            final String EVENT = "E";
+            final String DEADLINE = "D";
+            final String DONE = "1";
+            int idx;
+
             // Create and add task object into TaskList based on row data
-            switch (item[0]) {
-            case "T":
+            switch (type) {
+            case TODO:
                 assert item.length == 3;
-                list.add(new Todo(item[2]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+                list.add(new Todo(desc));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
                 }
                 break;
-            case "E":
+            case EVENT:
                 assert item.length == 4;
-                list.add(new Event(item[2], item[3]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+                dateTime = item[3];
+                list.add(new Event(desc, dateTime));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
                 }
                 break;
-            case "D":
+            case DEADLINE:
                 assert item.length == 4;
-                list.add(new Deadline(item[2], item[3]));
-                if (item[1].equals("1")) {
-                    list.get(list.size() - 1).isDone = true;
+                dateTime = item[3];
+                list.add(new Deadline(desc, dateTime));
+                idx = list.size() - 1;
+                if (status.equals(DONE)) {
+                    list.get(idx).isDone = true;
+
                 }
                 break;
             default:

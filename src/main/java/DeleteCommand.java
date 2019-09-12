@@ -19,17 +19,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        int item = Integer.parseInt(itemNo) - 1;
+        int itemIdx = Integer.parseInt(itemNo) - 1;
         int num = tasks.list.size();
-        assert item < num;
+        assert itemIdx < num;
+        Task removedTask = tasks.list.get(itemIdx);
 
-        String line1 = "Noted. I've removed this task:\n" + "   " + tasks.list.get(item);
-
-        tasks.list.remove(item);
+        tasks.list.remove(itemIdx);
         assert tasks.list.size() == num - 1;
+        num = tasks.list.size();
 
-        String line2 = "Now you have " + tasks.list.size() + " in the list.";
+        return ui.printRemovalCommand(num, removedTask);
 
-        return line1 + "\n" + line2;
     }
 }

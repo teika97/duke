@@ -24,7 +24,7 @@ public class Event extends Task {
      */
     @Override
     public String getInfo() {
-        return this.type + "-" + super.getInfo() + "-" + this.at;
+        return this.type + "--" + super.getInfo() + "--" + this.at;
     }
 
     /**

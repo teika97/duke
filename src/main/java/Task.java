@@ -26,9 +26,9 @@ public class Task {
      */
     public String getInfo() {
         if (this.isDone) {
-            return "1" + "-" + this.description;
+            return "1" + "--" + this.description;
         }
-        return "0" + "-" + this.description;
+        return "0" + "--" + this.description;
     }
 
     /**
