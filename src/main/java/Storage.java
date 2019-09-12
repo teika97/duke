@@ -32,6 +32,7 @@ public class Storage {
             // Split all words in a row from file
             String line = s.nextLine();
             String [] item = line.split("--");
+            assert (item[1].equals("1") || item[1].equals("0"));
 
             String type = item[0];
             String status = item[1];
@@ -47,6 +48,7 @@ public class Storage {
             // Create and add task object into TaskList based on row data
             switch (type) {
             case TODO:
+                assert item.length == 3;
                 list.add(new Todo(desc));
                 idx = list.size() - 1;
                 if (status.equals(DONE)) {
@@ -54,6 +56,7 @@ public class Storage {
                 }
                 break;
             case EVENT:
+                assert item.length == 4;
                 dateTime = item[3];
                 list.add(new Event(desc, dateTime));
                 idx = list.size() - 1;
@@ -62,14 +65,17 @@ public class Storage {
                 }
                 break;
             case DEADLINE:
+                assert item.length == 4;
                 dateTime = item[3];
                 list.add(new Deadline(desc, dateTime));
                 idx = list.size() - 1;
                 if (status.equals(DONE)) {
                     list.get(idx).isDone = true;
+
                 }
                 break;
             default:
+                assert false : item[0];
                 break;
             }
         }

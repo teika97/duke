@@ -20,12 +20,15 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         int itemIdx = Integer.parseInt(itemNo) - 1;
-        int num;
+        int num = tasks.list.size();
+        assert itemIdx < num;
         Task removedTask = tasks.list.get(itemIdx);
 
         tasks.list.remove(itemIdx);
+        assert tasks.list.size() == num - 1;
         num = tasks.list.size();
 
         return ui.printRemovalCommand(num, removedTask);
+
     }
 }

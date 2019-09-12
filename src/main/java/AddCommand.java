@@ -38,6 +38,7 @@ public class AddCommand extends Command {
             tasks.list.add(new Event(description,dateTime));
             break;
         default:
+            assert false : type;
             break;
         }
 
@@ -46,5 +47,6 @@ public class AddCommand extends Command {
         Task newTask = tasks.list.get(idx);
 
         return ui.printAddedCommand(num, newTask);
+
     }
 }
