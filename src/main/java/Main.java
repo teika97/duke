@@ -13,7 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Duke runDuke = new Duke("/Users/Kai/Documents/GitHub/duke/data/data.txt");
+    //"/Users/Kai/Documents/GitHub/duke/data/data.txt"
+    private Duke runDuke = new Duke();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -21,6 +22,9 @@ public class Main extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
+
+    public Main() throws DukeException {
+    }
 
     @Override
     public void start(Stage stage) {

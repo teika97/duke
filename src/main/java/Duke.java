@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -8,15 +9,44 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+    private String root = "";
+    private String fileDir = "data";
+    private String fileName = "data.txt";
+    private String dataFilePath = "";
+    private String dataDirPath = "";
 
     /**
      * Constructor.
-     * @param filePath location of file
      */
-    public Duke(String filePath) {
+    public Duke() throws DukeException {
         ui = new Ui();
+
+        try {
+            // Checks for whether a data directory and a data file exists within that directory
+            // New data directory or data file is created if necessary
+            // Solution below adapted from https://github.com/nus-cs2103-AY1920S1/duke/pull/37/commits/060a6e36a706715f663c335ddb0b7d615fd4af81
+            root = System.getProperty("user.dir");
+            dataFilePath = root + File.separator + fileDir + File.separator + fileName;
+            dataDirPath = root + File.separator + fileDir;
+            File dataFile = new File(dataFilePath);
+            File dataDir = new File(dataDirPath);
+            if (dataDir.mkdir()) {
+                dataFile.createNewFile();
+                System.out.println("New directory and file created.");
+            } else {
+                if (dataFile.mkdir()) {
+                    System.out.println("New file created.");
+                }
+                else {
+                    System.out.println("File already exists.");
+                }
+            }
+        } catch (IOException e) {
+            throw new DukeException("There is an error with setting up data file requirements.");
+        }
+
         parser = new Parser();
-        storage = new Storage(filePath);
+        storage = new Storage(dataFilePath);
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException e) {
