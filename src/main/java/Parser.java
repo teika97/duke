@@ -140,18 +140,19 @@ public class Parser {
     public void validateCmd(String [] cmd, int n) throws DukeException {
         // Throw DukeException based on which requirement it violates
         if (!(isTodo || isDeadline || isEvent || isList || isBye || isDone || isDelete || isFind || isSort)) {
-            throw new DukeException("Command type not valid.");
+            throw new DukeException("That command doesn't make any sense.");
         }
         if (isTodo || isDeadline || isEvent) {
             if (cmd[1] == null) {
-                throw new DukeException("The description of a " + cmd[0] + " cannot be empty.");
+                throw new DukeException("You forgot to add the task description.");
             }
             if ((isDeadline || isEvent) && (cmd[3] == null)) {
-                throw new DukeException("No date/time input for " + cmd[0] + "." + " Note: Input for "
-                        + cmd[0] + " must have " + (isDeadline ? "/by" : "/at") + " before date/time.");
+                throw new DukeException("You forgot to add the date and time for " + cmd[0] + "." + " Don't forget that for an "
+                        + cmd[0] + " you need to add " + (isDeadline ? "/by" : "/at") + " before the date and time.");
             }
             if ((isDeadline || isEvent) && !(cmd[2].equals(isDeadline ? "/by" : "/at"))) {
-                throw new DukeException("Input for " + cmd[0] + " must have " + (isDeadline ? "/by" : "/at") + ".");
+                throw new DukeException("Sorry about being so strict, but a " + cmd[0] + " must have an " + (isDeadline ? "/by" : "/at")
+                        + " before the date and time.");
             }
 
         }
@@ -160,19 +161,19 @@ public class Parser {
             try {
                 itemNo = Integer.parseInt(cmd[1]);
             } catch (NumberFormatException exception) {
-                throw new DukeException("Unable to format due to improper input.");
+                throw new DukeException("What you entered doesn't make any sense. Please use the correct format.");
             }
             if (itemNo > n) {
-                throw new DukeException("Task " + itemNo + " not found in list.");
+                throw new DukeException("You only have " + n + " tasks in the list currently.");
             }
             if (!(cmd[2] == null) || !(cmd[3] == null)) {
-                throw new DukeException("Unable to format due to improper input.");
+                throw new DukeException("What you entered doesn't make any sense. Please use the correct format.");
             }
         }
         if (isFind) {
             String [] keyWords = cmd[1].split(" ");
             if (keyWords.length > 1) {
-                throw new DukeException("Only one keyword allowed.");
+                throw new DukeException("We currently can only search using one key word. Sorry for the inconvenience.");
             }
         }
     }

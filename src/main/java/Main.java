@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     private Duke runDuke = new Duke("/Users/Kai/Documents/GitHub/duke/data/data.txt");
     private ScrollPane scrollPane;
     private VBox dialogContainer;

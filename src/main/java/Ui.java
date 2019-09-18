@@ -8,7 +8,7 @@ public class Ui {
      * Prints loadingError if unable to find file to load content.
      */
     public String showLoadingError() {
-        DukeException loadingError = new DukeException("Unable to find File!");
+        DukeException loadingError = new DukeException("That file doesn't exist.");
         return loadingError.getMessage();
     }
 
@@ -16,7 +16,7 @@ public class Ui {
      * Prints savingError if unable to find file to write content.
      */
     public String showSavingError() {
-        DukeException savingError = new DukeException("Unable to save File!");
+        DukeException savingError = new DukeException("Something went wrong when saving the file.");
         return savingError.getMessage();
     }
 
@@ -31,7 +31,7 @@ public class Ui {
          + "|____/ \\__,_|_|\\_\\___|\n";
          System.out.println("Hello from\n" + logo);**/
 
-        return "Hello! I'm Duke.\nWhat can I do for you?";
+        return "Hey! Duke speaking. \nHow may I help you today?";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * Prints goodbye message.
      */
     public String sayGoodbye() {
-        return "Bye. Hope to see you again soon!";
+        return "Glad to be able to help. See you again soon!";
     }
 
     /**

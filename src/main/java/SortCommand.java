@@ -22,7 +22,7 @@ public class SortCommand extends Command{
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         sortByTaskType(tasks);
-        return "List has been sorted!";
+        return "Your list has been sorted!";
     }
 
     public void sortByTaskType(TaskList tasks) {
