@@ -3,8 +3,8 @@
 Project Duke is a a Personal Assistant Chatbot that helps a person keep track of various things. 
 In order to run Duke, please ensure you have Java versions 11 or later installed in your computer.
 
-Download the latest version of Duke at www.google.com.
-1. Ensure you have Java version 11 or later versions installed in your computer.
+Download the latest version of Duke and
+ensure you have Java version 11 or later versions installed in your computer.
 
 ## 2. Features
 This application continues the following features as described in this section. 
@@ -31,7 +31,7 @@ Expected Usage | Expected Outcome
 -------------- | ----------------
 todo Buy books | [T][☓] Buy books
 event Birthday party /at 11-08-2019 16:00 | [E][☓] Birthday party (at: 11 August, 2019, 04:00 PM)
-deadline Project submission /by 19-10-2019 23:59 | [D][☓] Project Submission (by: 19 August, 2019, 11:59 PM)
+deadline Project submission /by 19-10-2019 23:59 | [D][☓] Project submission (by: 19 August, 2019, 11:59 PM)
 
 For date time format, please use `dd-MM-yyyy HH:mm`.
 
@@ -73,8 +73,8 @@ find birthday | List of all tasks with the keyword 'birthday'
 #### 2.5 Sort the list according to task type as well as date and time
 The user can sort a list according to task type, which each task type sorted according to the following order:
 * Todo: By `task_description` in alphabetical order
-* Event: By `date` `time` by chronological order
-* Deadline: By `date` `time` by chronological order
+* Event: By `date` `time` in chronological order
+* Deadline: By `date` `time` in chronological order
 
 Command Syntax:
 
@@ -118,7 +118,7 @@ Expected Usage | Expected Outcome
 -------------- | ----------------
 bye | Goodbye message from Duke
 
-## External Storage of Task List
+## 3. External Storage of Task List
 Duke saves all tasks in the task list into a file called `data.txt` found in the `data` directory that can be found in the `duke` directory.
 
 In the case that there is no such directory, a new directory and file will be created accordingly. However, if the file and directory already exist,
