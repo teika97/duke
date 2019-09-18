@@ -23,10 +23,6 @@ public class Main extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
 
-    public static void main(String[] args) {
-        launch();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
