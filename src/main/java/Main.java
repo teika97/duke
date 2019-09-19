@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -117,6 +118,14 @@ public class Main extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-        userInput.clear();
+
+        // Closes application automatically when the bye command is entered
+        // Adapted from https://github.com/zhangxuan97/duke/blob/master/src/main/java/MainWindow.java
+        if (userInput.getText().equals("bye")) {
+            Platform.exit();
+        }
+        else {
+            userInput.clear();
+        }
     }
 }
