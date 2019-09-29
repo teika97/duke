@@ -147,11 +147,11 @@ public class Parser {
                 throw new DukeException("You forgot to add the task description.");
             }
             if ((isDeadline || isEvent) && (cmd[3] == null)) {
-                throw new DukeException("You forgot to add the date and time for " + cmd[0] + "." + " Don't forget that for an "
-                        + cmd[0] + " you need to add " + (isDeadline ? "/by" : "/at") + " before the date and time.");
+                throw new DukeException("You forgot to add the date and time for " + cmd[0] + ".\n" + "Don't forget that for a "
+                        + cmd[0] + " you need to add\n" + (isDeadline ? "/by" : "/at") + " before the date and time.");
             }
             if ((isDeadline || isEvent) && !(cmd[2].equals(isDeadline ? "/by" : "/at"))) {
-                throw new DukeException("Sorry about being so strict, but a " + cmd[0] + " must have an " + (isDeadline ? "/by" : "/at")
+                throw new DukeException("Sorry about being so strict, but a " + cmd[0] + " must have a\n " + (isDeadline ? "/by" : "/at")
                         + " before the date and time.");
             }
 
