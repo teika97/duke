@@ -119,7 +119,7 @@ Command Syntax:
 
 Expected Usage | Expected Outcome
 -------------- | ----------------
-bye | Goodbye message from Duke
+bye | Exit application
 
 ## 3. External Storage of Task List
 Duke saves all tasks in the task list into a file called `data.txt` found in the `data` directory that can be found in the `duke` directory.
