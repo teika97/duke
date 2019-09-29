@@ -94,8 +94,7 @@ public class Parser {
             try {
                 convertedDate = setDate(finalCmdUnits[3]);
             } catch (ParseException e) {
-                System.out.println("Warning - Unable to format date/time input.");
-                convertedDate = finalCmdUnits[3];
+                throw new DukeException("Warning - Unable to format date/time input.");
             }
             finalCmd = new AddCommand(finalCmdUnits[0], finalCmdUnits[1], convertedDate);
         }
