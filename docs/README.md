@@ -1,13 +1,16 @@
 # User Guide
 ## 1. Introduction
 Project Duke is a a Personal Assistant Chatbot that helps a person keep track of various things. 
-In order to run Duke, please ensure you have Java versions 11 or later installed in your computer.
+In order to run Duke, please ensure you have Java versions 11 installed in your computer.
 
-Download the latest version of Duke and
-ensure you have Java version 11 or later versions installed in your computer.
+Download the latest version of Duke i.e. duke-0.3.jar.
+
+To run the application:
+* For Mac Users, run the jar file in terminal
+* For Window Users, double-click the jar file
 
 ## 2. Features
-This application continues the following features as described in this section. 
+This application contains the following features as described in this section. 
 Please follow the set command syntax as shown below:
 
 #### 2.1 Add new tasks into the task list
