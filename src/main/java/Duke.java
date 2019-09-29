@@ -55,9 +55,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints out welcome message.
+     * @return welcome message
+     */
     public String showWelcome() {
         return ui.showWelcome();
     }
+
+    /**
+     * Prints out goodbye message.
+     * @return goodbye message
+     */
+    public String sayGoodbye() { return ui.sayGoodbye();}
 
     /**
      * Runs duke program to get response for user command input.
